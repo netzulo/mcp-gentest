@@ -17,32 +17,37 @@ export async function generateSteps(featurePath: string): Promise<string | null>
     messages: [
       {
         role: 'system',
-        content: 'Generas step definitions en TypeScript para pruebas automatizadas con Cucumber y Selenium WebDriver. El código debe ser limpio y sin explicaciones.',
+        content:
+          'You generate step definitions in modern TypeScript for automated tests using Cucumber and Selenium WebDriver. Your output must be clean TypeScript code only, no explanations or comments.',
       },
       {
         role: 'user',
         content: `
-Dado el siguiente archivo .feature, genera su archivo .steps.ts correspondiente.
+Given the following .feature file, generate a complete .steps.ts file.
 
-Instrucciones:
-- Usa solo TypeScript moderno.
-- Usa Selenium WebDriver. No uses Protractor.
-- No declares el objeto "driver", asume que ya existe.
-- Evita "await" sobre funciones que no devuelven una Promise.
-- Usa "By.css", "driver.findElement", "driver.findElements", etc.
-- Importa solo lo necesario desde "cucumber" y "selenium-webdriver".
-- No generes comentarios, texto adicional ni explicaciones.
+Instructions:
+- Use modern TypeScript and Selenium WebDriver (not Protractor).
+- Assume "driver" is imported from "../support/webdriver".
+- Do NOT use or reference any "pageObjects".
+- Use "By.css", "driver.findElement", etc.
+- Avoid "await" on non-async functions.
+- Import only necessary functions from "cucumber" and "selenium-webdriver".
+- Output ONLY the code (no explanations or markdown formatting).
+- Include the following import at the top:
 
-Contenido del archivo:
+import { driver } from '../support/webdriver';
+
+Here is the .feature content:
 
 \`\`\`gherkin
 ${content}
 \`\`\`
-        `.trim(),
+`.trim(),
       },
     ],
     temperature: 0.2,
   })
+
 
   const stepsCode = completion.choices[0].message.content?.trim()
   const cleanStepsCode = stepsCode ? stripCodeBlock(stepsCode) : null

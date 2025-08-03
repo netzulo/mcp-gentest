@@ -1,5 +1,4 @@
 node_modules/
-dist/
 coverage/
 *.log
 .DS_Store
@@ -20,3 +19,7 @@ tests/**/*
 cucumber/features/*.feature
 cucumber/step_definitions/*.steps.ts
 cucumber/step_definitions/*.steps.js
+
+# Transpiled files
+dist/
+dist-cucumber/

@@ -122,6 +122,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## 🧪 Demo
 
 ```bash
+yarn analyze:example
 yarn features:example
 yarn steps:example
 yarn test:run
