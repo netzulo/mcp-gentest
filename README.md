@@ -127,8 +127,12 @@ yarn features:example
 yarn steps:example
 yarn test:run
 # or
-yarn clean && yarn && yarn runner:example && yarn test:run
+yarn clean && yarn && yarn runner:example
 ```
+
+Check the asciinema recording for a demo of the tool in action.
+
+[![asciicast](https://asciinema.org/a/731435.svg)](https://asciinema.org/a/731435)
 
 ---
 

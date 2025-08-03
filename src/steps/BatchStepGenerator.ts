@@ -10,10 +10,6 @@ export async function runStepBatch(featurePaths: string[], overwrite = false) {
 
   for (const featurePath of featurePaths) {
     console.log(`🧪 Generando steps para: ${featurePath}`)
-
-    const stepsCode = await generateSteps(featurePath)
-    if (!stepsCode) continue
-
     const baseName = path.basename(featurePath).replace(/\.feature$/, '')
     const stepsPath = path.join(STEP_DIR, `${baseName}.steps.ts`)
 
@@ -27,7 +23,12 @@ export async function runStepBatch(featurePaths: string[], overwrite = false) {
       // File doesn't exist, continue to write
     }
 
-    await fs.writeFile(stepsPath, stepsCode, 'utf-8')
-    console.log(`✅ Steps guardados en: ${stepsPath}`)
+    const stepsContent = await generateSteps(featurePath)
+    if (stepsContent) {
+      await fs.writeFile(stepsPath, stepsContent, 'utf8')
+      console.log(`✅ Steps generados: ${stepsPath}`)
+    } else {
+      console.error(`❌ Error al generar steps para: ${featurePath}`)
+    }
   }
 }
