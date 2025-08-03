@@ -24,7 +24,7 @@
     "runner": "yarn build && yarn build:tests && node dist/runner/index.js",
     "runner:example": "yarn build && yarn build:tests && node dist/runner/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 3 --overwrite",
 
-    "test:run": "yarn build:tests && cucumber-js dist-cucumber/features --require dist-cucumber/step_definitions/**/*.js"
+    "test:run": "yarn build:tests && cucumber-js cucumber/features --require dist-cucumber/step_definitions/**/*.js"
   },
   "keywords": [],
   "author": "",
