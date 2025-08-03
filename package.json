@@ -11,19 +11,14 @@
     "build": "tsc -p tsconfig.build.json",
     "build:tests": "tsc -p tsconfig.tests.json",
     "build:all": "yarn build && yarn build:tests",
-
     "analyze": "yarn build && node dist/analyzer/index.js",
     "analyze:example": "yarn build && node dist/analyzer/index.js --project projects/sbg-ibizatechforum-landing",
-
     "features": "yarn build && node dist/prompt/index.js",
     "features:example": "yarn build && node dist/prompt/index.js --project projects/sbg-ibizatechforum-landing --include src/ --limit 3 --overwrite",
-
     "steps": "yarn build:tests && node dist-cucumber/steps/index.js",
     "steps:example": "yarn build:tests && node dist-cucumber/steps/index.js --project cucumber/features --overwrite",
-
     "runner": "yarn build && yarn build:tests && node dist/runner/index.js",
     "runner:example": "yarn build && yarn build:tests && node dist/runner/index.js --project projects/sbg-ibizatechforum-landing --include src/ --limit 3 --overwrite --serve",
-
     "test:run": "yarn build:tests && cucumber-js cucumber/features --require dist-cucumber/step_definitions/**/*.js"
   },
   "keywords": [],
@@ -34,6 +29,7 @@
     "@modelcontextprotocol/sdk": "^1.17.1",
     "openai": "^5.11.0",
     "selenium-webdriver": "^4.34.0",
+    "tree-kill": "^1.2.2",
     "yaml": "^2.8.0",
     "yargs": "^18.0.0"
   },

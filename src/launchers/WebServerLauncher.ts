@@ -1,8 +1,9 @@
-import { spawn, ChildProcessWithoutNullStreams, execSync } from 'child_process'
+import { spawn, ChildProcessWithoutNullStreams } from 'child_process'
 import path from 'path'
 import fs from 'fs/promises'
 import net from 'net'
 import http from 'http'
+import kill from 'tree-kill'
 
 export interface WebServerOptions {
   projectRoot: string
@@ -104,26 +105,23 @@ export class WebServerLauncher {
   async stop(): Promise<void> {
     if (this.child) {
       const pid = this.child.pid
+      if (!pid) {
+        console.warn('No PID found for the child process. It may have already exited.')
+        this.child = null
+        return
+      }
       console.log('🛑 Killing process tree for PID', pid)
 
-      if (process.platform !== 'win32') {
-        try {
-          execSync(`pgrep -P ${pid}`)
-            .toString()
-            .split('\n')
-            .forEach(subPid => {
-              if (subPid.trim()) {
-                execSync(`kill -TERM ${subPid}`)
-              }
-            })
-        } catch (err) {
-          console.warn('No child processes to kill or failed to kill:', (err as Error).message)
+      kill(pid, 'SIGTERM', (err) => {
+        if (err) {
+          console.error('❌ Failed to kill process tree:', err.message)
+        } else {
+          console.log('✅ Dev server fully terminated')
         }
-      }
+      })
 
-      this.child.kill('SIGTERM')
       this.child = null
-      console.log('✅ Dev server fully terminated')
+      console.log('✅ Dev server stopped.')
     }
   }
 }
