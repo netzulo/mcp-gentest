@@ -16,13 +16,13 @@
     "analyze:example": "yarn build && node dist/analyzer/index.js --project tests/sbg-ibizatechforum-landing",
 
     "features": "yarn build && node dist/prompt/index.js",
-    "features:example": "yarn build && node dist/prompt/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 5 --overwrite",
+    "features:example": "yarn build && node dist/prompt/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 3 --overwrite",
 
     "steps": "yarn build:tests && node dist-cucumber/steps/index.js",
     "steps:example": "yarn build:tests && node dist-cucumber/steps/index.js --project cucumber/features --overwrite",
 
     "runner": "yarn build && yarn build:tests && node dist/runner/index.js",
-    "runner:example": "yarn build && yarn build:tests && node dist/runner/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 5 --overwrite",
+    "runner:example": "yarn build && yarn build:tests && node dist/runner/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 3 --overwrite",
 
     "test:run": "yarn build:tests && cucumber-js dist-cucumber/features --require dist-cucumber/step_definitions/**/*.js"
   },

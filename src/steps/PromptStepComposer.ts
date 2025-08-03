@@ -31,7 +31,7 @@ Instructions:
 - Do NOT use or reference any "pageObjects".
 - Use "By.css", "driver.findElement", etc.
 - Avoid "await" on non-async functions.
-- Use "setSize" for setting screen width.
+- Use "setSize" instead of "setRect" for setting width and height.
 - Import only necessary functions from "cucumber" and "selenium-webdriver".
 - Output ONLY the code (no explanations or markdown formatting).
 - Include the following import at the top:
