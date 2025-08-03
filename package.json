@@ -1,0 +1,45 @@
+{
+  "name": "mcp-gentest",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "clean": "rm -rf dist node_modules package-lock.json yarn.lock",
+    "build": "tsc",
+    "analyze": "tsc && node dist/analyzer/index.js",
+    "analyze:example": "tsc && node dist/analyzer/index.js --project tests/sbg-ibizatechforum-landing",
+    "features": "tsc && node dist/prompt/index.js",
+    "features:example": "tsc && node dist/prompt/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 5 --overwrite",
+    "steps": "tsc && node dist/steps/index.js",
+    "steps:example": "tsc && node dist/steps/index.js --project cucumber/features --overwrite",
+    "runner": "tsc && node dist/runner/index.js",
+    "runner:example": "tsc && node dist/runner/index.js --project tests/sbg-ibizatechforum-landing --include src/ --limit 5 --overwrite",
+    "test:run": "yarn build && cucumber-js dist/cucumber/features --require dist/cucumber/step_definitions/**/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "openai": "^5.11.0",
+    "selenium-webdriver": "^4.34.0",
+    "yaml": "^2.8.0",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.1.0",
+    "@types/chai": "^5.2.2",
+    "@types/node": "^24.1.0",
+    "@types/protractor": "^4.0.0",
+    "@types/yargs": "^17.0.33",
+    "chai": "^5.2.1",
+    "dotenv": "^17.2.1",
+    "protractor": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}

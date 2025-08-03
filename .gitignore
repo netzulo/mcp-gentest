@@ -1,0 +1,22 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+
+
+package-lock.json
+yarn.lock
+
+## Copied projects files to auto generate tests
+tests/**/*
+
+# Ignore environment files
+*.env
+.env.prod
+
+
+# Auto-generated files from scripts
+cucumber/features/*.feature
+cucumber/step_definitions/*.steps.ts
+cucumber/step_definitions/*.steps.js
