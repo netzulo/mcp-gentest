@@ -34,9 +34,14 @@ Instructions:
 - Use "setSize" instead of "setRect" for setting width and height.
 - Import only necessary functions from "cucumber" and "selenium-webdriver".
 - Output ONLY the code (no explanations or markdown formatting).
-- Include the following import at the top:
+- Include the following at the top of the file:
 
-import { driver } from '../support/webdriver.js';
+\`\`\`ts
+import { driver } from '../support/webdriver.js'
+const baseUrl = process.env.TEST_BASE_URL || 'http://localhost:3000'
+\`\`\`
+
+- Use \`\`\`await driver.get(\`\${baseUrl}/\`)\`\`\` in the step that renders the component.
 
 Here is the .feature content:
 
@@ -48,7 +53,6 @@ ${content}
     ],
     temperature: 0.2,
   })
-
 
   const stepsCode = completion.choices[0].message.content?.trim()
   const cleanStepsCode = stepsCode ? stripCodeBlock(stepsCode) : null

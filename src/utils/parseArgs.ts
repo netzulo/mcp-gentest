@@ -25,6 +25,12 @@ export async function parseCLIArgs() {
       default: false,
       describe: 'Sobrescribir archivos existentes'
     })
+    .option('serve', {
+      alias: 's',
+      type: 'boolean',
+      default: false,
+      describe: 'Whether to launch the project web server automatically',
+    })
     .help()
     .argv
 }
