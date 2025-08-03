@@ -4,6 +4,7 @@ import { CodeContextBuilder } from '../analyzer/CodeContextBuilder.js'
 import { runBatch as runFeatureBatch } from '../prompt/BatchFeatureGenerator.js'
 import { runStepBatch } from '../steps/BatchStepGenerator.js'
 import { WebServerLauncher } from '../launchers/WebServerLauncher.js'
+import { CucumberLauncher } from '../launchers/CucumberLauncher.js'
 import fs from 'fs/promises'
 import path from 'path'
 
@@ -54,6 +55,22 @@ export async function runRunner() {
 
   console.log(`🔁 Generando steps para ${fullPaths.length} features...`)
   await runStepBatch(fullPaths, args.overwrite)
+
+  // 👇 Ejecutar Cucumber
+  console.log('🧬 Ejecutando tests con Cucumber...')
+  const cucumber = new CucumberLauncher()
+  try {
+    await cucumber.run({
+      projectRoot: process.cwd(),
+      featureGlob: 'cucumber/features/**/*.feature',
+      requireGlob: 'dist-cucumber/step_definitions/**/*.js',
+      format: 'progress',
+    })
+    console.log('✅ Tests ejecutados correctamente.')
+  } catch (err) {
+    console.error('❌ Tests fallidos:', err)
+    process.exit(1)
+  }
 
   if (webServer) {
     console.log('🛑 Stopping dev server...')
